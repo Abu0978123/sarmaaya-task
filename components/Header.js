@@ -4,6 +4,7 @@ import Wrapper from "./Wrapper";
 import Link from "next/link";
 import Menu from "./Menu";
 import MenuMobile from "./MenuMobile";
+import { useSelector } from "react-redux";
 
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
@@ -19,7 +20,7 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState(null);
 
-  // const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -56,7 +57,7 @@ const Header = () => {
     >
       <Wrapper className="h-[60px] flex justify-between items-center ">
         <Link href="/" className="no-underline text-black">
-          <h5>Ecommerce</h5>
+          <h1 className="font-bold mt-2 text-2xl">Ecommerce</h1>
         </Link>
 
         <Menu
@@ -78,11 +79,11 @@ const Header = () => {
           {/* Icon start */}
           <Link href="/cart">
             <div className="w-8 md:w-[148px] h-[34px] rounded-[15px] md:h-10  flex justify-center items-center bg-black  cursor-pointer relative">
-              {/* {cartItems.length > 0 && (
-                                <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+              {cartItems.length > 0 && (
+                                <div className="text-white mx-3 pt-1">
                                     {cartItems.length}
                                 </div>
-                            )} */}
+                            )}
               <BsCart className="text-[15px] text-white md:text-[20px]" />
             </div>
           </Link>

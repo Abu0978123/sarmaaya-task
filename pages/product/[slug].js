@@ -1,78 +1,112 @@
 import Wrapper from "@/components/Wrapper";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { useRouter } from 'next/router'
-const ProductDetails = () => {
-//   const routerr = useRouter({router})
-//  const router = routerr.query.slug;
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "@/store/cartSlice";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const ProductDetails = ({ productsData, productData }) => {
+  const dispatch = useDispatch();
+  // const p = productData?.id;
+
+  const notify = () => {
+    toast.success("Success. Check your cart!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   return (
     <div className="w-full md:py-20">
-      {/* <ToastContainer /> */}
-      <div className="container pb-4">
-      <Link href={'/'} className="md:ml-[100px] no-underline font-bold text-black">Back</Link>
+      <ToastContainer />
+      <div className="container mx-auto pb-4">
+        <Link
+          href={"/"}
+          className="md:ml-[170px] no-underline font-bold text-black"
+        >
+          Back
+        </Link>
       </div>
       <Wrapper>
-        <div className="flex flex-col lg:flex-row md:px-10 gap-[20px] lg:gap-[100px]">
+        <div className="flex flex-col lg:flex-row  md:px-10 gap-[20px] lg:gap-[100px] ">
           {/* left column start */}
-          
-          <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
+
+          <div className="w-full flex md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0  justify-center items-center">
             {/* <ProductDetailsCarousel images={p.image.data} /> */}
-            <img src= "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" 
-            width={477}
-            height={477}
-            className="rounded-[10px]"
+            <Image
+              src={productsData?.image}
+              width={300}
+              height={300}
+              alt={productsData?.title}
+              className="rounded-[10px] !object-contain"
             />
           </div>
           {/* left column end */}
 
           {/* right column start */}
-          <div className="flex-[1] py-3">
+          <div className="flex-[1] p-3 ">
             {/* PRODUCT TITLE */}
             <div className="text-[34px] font-semibold mb-2 leading-tight">
               {/* {p.name} */}
-              Products
+              {/* {post.name} */}
+              {productsData?.title}
             </div>
 
             {/* PRODUCT SUBTITLE */}
             <div className="text-lg font-semibold my-5">
-                {/* {p.subtitle} */}
-                <span className="font-medium text-black/[0.5]">Category:</span> <br></br>
-                electronics
+              {/* {p.subtitle} */}
+              <span className="font-medium text-black/[0.5]">
+                Category:
+              </span>{" "}
+              <br></br>
+              {productsData?.category}
             </div>
 
             {/* PRODUCT PRICE */}
             <div className="flex items-center">
               <p className="mr-2 font-medium text-black/[0.5]">
                 {/* MRP : &#8377;{p.price} */}
-                Description: 
+                Description:
               </p>
             </div>
 
-            <div className="text-md font-medium ">
-              incl. of taxes
-            </div>
-            
+            <div className="text-md ">{productsData?.description}</div>
 
             {/* PRODUCT SIZE RANGE START */}
             <div className="my-10">
               {/* HEADING START */}
               <div className="flex flex-col mb-2">
-                <div className="text-md font-medium text-black/[0.5]">Price</div>
-                <div className="text-md  font-semibold  cursor-pointer pt-2">
-                  $45
+                <div className="text-md font-medium text-black/[0.5]">
+                  Price
+                </div>
+                <div className="text-md montserrat-alternates-extrabold pt-2">
+                  <h3> ${productsData?.price}</h3>
                 </div>
               </div>
-              
             </div>
-            <button
-              className="w-full py-2 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
-   
+            <button className="w-full py-2 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
+            onClick={() => {
+              (
+                dispatch(addToCart(productsData))    
+                  );
+                  notify();
+              }
+            }
+
             >
-              Add to Cart
+              Buy Now
             </button>
-           
           </div>
-          </div>
+        </div>
       </Wrapper>
     </div>
   );
@@ -80,16 +114,29 @@ const ProductDetails = () => {
 
 export default ProductDetails;
 
-// export async function getStaticPaths({router}) {
-//   const product = await fetch(
-//       `https://fakestoreapi.com/products/${router.query.slug}`
-//   );
-//   console.log(`https://fakestoreapi.com/products/${router.query.slug}`)
-//   const data = await product.json()
+export async function getStaticPaths() {
+  // Fetch post IDs at build time
+  const posts = await fetch("https://fakestoreapi.com/products");
+  const postsData = await posts.json();
+  const paths = postsData.map((post) => ({
+    params: { slug: post.id.toString() },
+  }));
 
-//   return {
-//       props: {
-//           product:data
-//       },
-//   };
-// }
+  return { paths, fallback: false }; // No fallback for simplicity
+}
+
+export async function getStaticProps(context) {
+  const id = context.params.slug;
+  // Fetch post data at build time for each path
+  const products = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const productsData = await products.json();
+
+  const product = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const productData = await product.json();
+  return {
+    props: { 
+      productsData,
+      productData
+     },
+  };
+}
