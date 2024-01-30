@@ -5,7 +5,7 @@ import { TiMinus } from "react-icons/ti";
 
 const CartItem = ({item}) => {
   return (
-    <div className="flex px-3 p-1 gap-3 md:gap-5  justify-between items-center shadow-sm rounded my-3">
+    <div className="flex px-3 p-1 gap-3 md:gap-5  !justify-between items-center shadow-sm rounded my-3">
       {/* IMAGE START */}
       <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
         {/* <image */}
@@ -21,7 +21,7 @@ const CartItem = ({item}) => {
       {/* IMAGE END */}
 
       <div className="w-full flex flex-col ">
-        <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex flex-col md:flex-row !justify-center items-center">
           {/* PRODUCT TITLE */}
           <div className="text-lg  pl-8 text-black/[0.8]">
             {/* {p.name} */}
@@ -29,7 +29,7 @@ const CartItem = ({item}) => {
           </div> 
 
           {/* PRODUCT PRICE */}
-          <div className="text-sm md:text-md font-bold text-black block items-center">
+          <div className="text-sm md:text-md font-bold text-black block ">
             {/* {p.subtitle} */}
             ${item?.price}
           </div>
@@ -37,11 +37,11 @@ const CartItem = ({item}) => {
           {/* PRODUCT QUANTITY */}
           <div className="text-sm md:text-md font-bold text-black/[0.5] mt-2">
             <button className="bg-black text-white">
-              <TiMinus />
+              {/* <TiMinus /> */}
             </button>
-            <span className="px-2">{item?.quantity}</span>
+            {/* <span className="px-2">{item?.quantity}</span> */}
             <button className="bg-black text-white ">
-              <FaPlus />
+              {/* <FaPlus /> */}
             </button>
           </div>
         </div>

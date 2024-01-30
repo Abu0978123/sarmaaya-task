@@ -1,10 +1,10 @@
 import ProductCard from "@/components/ProductCard";
-import React from "react";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const electronic = ({ products }) => {
+ 
   return (
     <div className="container  mx-auto md:px-4 pt-4">
       <ToastContainer />

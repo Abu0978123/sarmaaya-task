@@ -24,8 +24,8 @@ const Cart = () => {
               <div className="hidden md:flex justify-between items-center text-md font-medium text-black/[0.5]">
                 <p></p>
                 <p>Name</p>
+                <p></p>
                 <p>Price</p>
-                <p>Quantity</p>
               </div>
               {cartItems.map((item) => (
                 <CartItem key={item.id} item={item} />
@@ -35,7 +35,7 @@ const Cart = () => {
             {/* cart items closed */}
 
             {/* SUMMARY START */}
-            <div className="flex-[1] shadow-md rounded-md">
+            <div className="flex-[1]  rounded-md">
               <div className="text-lg font-bold mt-5 pl-5 mb-2">Your total</div>
 
               <div className="px-5 bg-white  rounded-xl">
@@ -53,7 +53,7 @@ const Cart = () => {
               {/* BUTTON START */}
               <button
                 className="w-full py-2 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
-                // onClick={handlePayment}
+                onClick={()=>{alert("So here we will add payment gateway")}}
               >
                 Checkout
                 {/* {loading && <img src="/spinner.svg" />} */}

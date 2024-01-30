@@ -6,7 +6,7 @@ import { CiSearch } from "react-icons/ci";
 const Menu = () => {
   return (
     <>
-      <ul className="hidden md:flex items-center gap-8 font-medium pt-3 menu2">
+      <ul className="hidden md:flex items-center gap-5 px-4 font-medium pt-3 menu2">
         <Link
           className="no-underline text-black active:font-bold active:!text-black hover:!text-blue-500"
           href="/electronic/electronic"
@@ -33,7 +33,7 @@ const Menu = () => {
         </Link>
       </ul>
 
-      <ul className="hidden lg:flex items-center gap-8 font-medium pt-3 ">
+      <ul className="hidden lg:flex items-center gap-5 font-medium pt-3 px-3">
         <input
           className="h-[34px] w-[414] outline-none border rounded-[20px] p-[20px] relative"
           placeholder="Search"

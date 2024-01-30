@@ -29,7 +29,7 @@ const Index = ({ products }) => {
 export default Index;
 
 export async function getStaticProps() {
-  const res = await fetch("https://fakestoreapi.com/products");
+  const res = await fetch("https://fakestoreapi.com/products/category/electronics");
   const data = await res.json();
 
   return {

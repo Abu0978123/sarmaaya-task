@@ -1,7 +1,7 @@
 // import { getDiscountedPricePercentage } from "@/utils/helper";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { BsCart } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
@@ -9,6 +9,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ProductCard = ({data}) => {
+  const [isToggle, setToggle] = useState(true);
+  const handleToggle = () => {
+    setToggle(!isToggle);
+  }
   const dispatch = useDispatch();
   const notify = () => {
     toast.success("Success. Check your cart!", {
@@ -57,13 +61,15 @@ const ProductCard = ({data}) => {
           <div className="pt-4 pl-2 bg-black text-white flex justify-center m-4 pb-4 rounded-[10px]">
            <button className=""
           onClick={() => {
+            handleToggle;
             (
               dispatch(addToCart(data))    
                 );
                 notify();
+                
             }
           }
-           >Add to cart <BsCart className="inline text-[15px] text-white md:text-[20px]" /></button>
+           >{isToggle ? "Add to Card" :" Remove"} <BsCart className="inline text-[15px] text-white md:text-[20px]" /></button>
           </div>
     </div>
    

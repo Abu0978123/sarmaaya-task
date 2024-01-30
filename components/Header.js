@@ -53,7 +53,7 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full h-[50px] md:h-[70px] mt-[20px]   bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
+      className={`w-full h-[50px] md:h-[70px] mt-[20px]  bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
     >
       <Wrapper className="h-[60px] flex justify-between items-center ">
         <Link href="/" className="no-underline text-black">
@@ -78,7 +78,7 @@ const Header = () => {
         <div className="flex items-center gap-2 text-black">
           {/* Icon start */}
           <Link href="/cart">
-            <div className="w-8 md:w-[148px] h-[34px] rounded-[15px] md:h-10  flex justify-center items-center bg-black  cursor-pointer relative">
+            <div className="w-8 md:w-[148px] h-[34px] rounded-[15px] md:h-10  flex justify-center items-center bg-black  cursor-pointer relative mt-3">
               {cartItems.length > 0 && (
                                 <div className="text-white mx-3 pt-1">
                                     {cartItems.length}
