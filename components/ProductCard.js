@@ -27,6 +27,7 @@ const ProductCard = ({data}) => {
     });
   };
 
+
   // console.log("line nu", data.image)
   return (
     <>

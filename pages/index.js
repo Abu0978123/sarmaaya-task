@@ -3,6 +3,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Index = ({ products }) => {
+
+
   
   return (
     <div className="container mx-auto md:px-4 pt-4">

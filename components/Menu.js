@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
+// import { useSelector } from "react-redux";
 
 const Menu = () => {
+  // const { cartItems } = useSelector((state) => state.cart);
+  // const [activeSearch, setActiveSearch] = useState([])
+  
+
+    // const handleSearch = (e) => {
+    //     if(e.target.value == ''){
+    //         setActiveSearch([])
+    //         return false
+    //     }
+    //     setActiveSearch(cartItems.filter(w => w.includes(e.target.value)).slice(0,8))
+    // }
+
   return (
     <>
       <ul className="hidden md:flex items-center gap-5 px-4 font-medium pt-3 menu2">
@@ -33,11 +46,12 @@ const Menu = () => {
         </Link>
       </ul>
 
-      <ul className="hidden lg:flex items-center gap-5 font-medium pt-3 px-3">
+      <ul className="hidden lg:flex items-center gap-5 justify-center font-medium pt-3 px-3">
         <input
           className="h-[34px] w-[414] outline-none border rounded-[20px] p-[20px] relative"
           placeholder="Search"
           type="search"
+          // onChange={(e) => handleSearch(e)}
         />
         <CiSearch className=" text-2xl h-4 w-5 text-black absolute ml-[210px]" />
       </ul>
